@@ -1,23 +1,104 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Axios from 'axios'
 
 function App() {
+  const [pokemon, setPokemon] = useState("")
+  const [species, setSpecies] = useState("")
+  const [flavor, setFlavor] = useState("")
+  const [pokemonEvolutionData, setPokemonEvolutionData] = useState("")
+
+  async function randomPokemon() {
+    let randomNumber = (Math.floor(Math.random() * Math.floor(809)))
+    try {
+      getPokemon(randomNumber)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function getPokemon(term) {
+    try {
+      const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${term}/`)
+      const pokemon = response.data
+      setPokemon(pokemon)
+      getSpecies(term)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function getSpecies(term) {
+    try {
+      const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon-species/${term}`)
+      setSpecies(response.data)
+      setFlavor(response.data.flavor_text_entries.filter(text => text.language.name === "en"))
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  async function getEvolutions() {
+    try {
+      
+      const response = await Axios.get(species.evolution_chain.url)
+
+      let evoChain = [];
+      let evoData = response.data.chain;
+
+      do {
+        let numberOfEvolutions = evoData["evolves_to"].length;
+
+        if (numberOfEvolutions > 1) {
+          for (let i = 1; i < numberOfEvolutions; i++) {
+            evoChain.push({
+              species_name: evoData.evolves_to[i].species.name,
+            });
+          }
+        }
+
+        evoChain.push({
+          species_name: evoData.species.name,
+        });
+
+        evoData = evoData["evolves_to"][0];
+      } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
+      console.log("evo chain from getEvolutions function: ", evoChain)
+
+      let evolutions = []
+      let fulfilled = []
+      let pokemonEvolutionData = []
+
+      evoChain.forEach(element => {
+
+        let evolution = Axios.get(`https://pokeapi.co/api/v2/pokemon/${element.species_name}`)
+        evolutions.push(evolution)
+
+      })
+
+      Axios.all(evolutions).then(
+        (Axios.spread((...args) => {
+          fulfilled.push(args)
+          fulfilled[0].forEach(element => {
+            pokemonEvolutionData.push(element.data)
+          });
+        })))
+        setPokemonEvolutionData(pokemonEvolutionData)
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={randomPokemon}>Get Random Pokemon</button>
+        <button onClick={getEvolutions}>Get Evolutions</button>
       </header>
     </div>
   );
