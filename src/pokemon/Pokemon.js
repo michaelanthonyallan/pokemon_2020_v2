@@ -32,10 +32,7 @@ export default function Pokemon(props) {
             
             
             <h2>Your pokemon is...</h2>
-            
-            {shiny && (
             <p className="capitalize">Name: {props.pokemon.name}</p>
-            )}
             <p className="capitalize">{plural ? 'Types: ' : 'Type: '} {props.types}</p>
             
 

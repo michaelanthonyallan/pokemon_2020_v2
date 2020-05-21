@@ -37,16 +37,17 @@ function App() {
       const response = await Axios.get(`https://pokeapi.co/api/v2/pokemon-species/${term}`)
       setSpecies(response.data)
       setFlavor(response.data.flavor_text_entries.filter(text => text.language.name === "en"))
+      getEvolutions(response.data.evolution_chain.url)
     } catch (error) {
       console.log(error)
     }
 
   }
 
-  async function getEvolutions() {
+  async function getEvolutions(term) {
     try {
       
-      const response = await Axios.get(species.evolution_chain.url)
+      const response = await Axios.get(term)
 
       let evoChain = [];
       let evoData = response.data.chain;
@@ -107,12 +108,16 @@ function App() {
 
         <PokemonResults pokemon={pokemon} allFlavorText={flavor} evolutions={pokemonEvolutionData}/>
 
-        <button onClick={getEvolutions}>Get Evolutions</button>
+        {/* <button onClick={getEvolutions}>Get Evolutions</button> */}
 
         </div>)}
 
-        {pokemon && species && flavor && pokemonEvolutionData && (
+        <br></br>
+        <br></br>
+
+        {pokemon && species && flavor && pokemonEvolutionData.length > 1 && (
           <div>
+            <h3>Evolutions</h3>
             <EvolutionResults evolutions={pokemonEvolutionData}/>
           </div>
         )}
