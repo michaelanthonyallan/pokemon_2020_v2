@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pokemon_2020_v2/static/css/main.1e8fe0af.chunk.css",
+    "main.js": "/pokemon_2020_v2/static/js/main.d2dcc8d3.chunk.js",
+    "main.js.map": "/pokemon_2020_v2/static/js/main.d2dcc8d3.chunk.js.map",
+    "runtime-main.js": "/pokemon_2020_v2/static/js/runtime-main.6b9dc7a4.js",
+    "runtime-main.js.map": "/pokemon_2020_v2/static/js/runtime-main.6b9dc7a4.js.map",
+    "static/js/2.f2288221.chunk.js": "/pokemon_2020_v2/static/js/2.f2288221.chunk.js",
+    "static/js/2.f2288221.chunk.js.map": "/pokemon_2020_v2/static/js/2.f2288221.chunk.js.map",
+    "index.html": "/pokemon_2020_v2/index.html",
+    "precache-manifest.f23c4b7af6e26be7cfdbeb1154e51ecc.js": "/pokemon_2020_v2/precache-manifest.f23c4b7af6e26be7cfdbeb1154e51ecc.js",
+    "service-worker.js": "/pokemon_2020_v2/service-worker.js",
+    "static/css/main.1e8fe0af.chunk.css.map": "/pokemon_2020_v2/static/css/main.1e8fe0af.chunk.css.map",
+    "static/js/2.f2288221.chunk.js.LICENSE.txt": "/pokemon_2020_v2/static/js/2.f2288221.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6b9dc7a4.js",
+    "static/js/2.f2288221.chunk.js",
+    "static/css/main.1e8fe0af.chunk.css",
+    "static/js/main.d2dcc8d3.chunk.js"
+  ]
+}
