@@ -121,7 +121,7 @@ function App() {
         {pokemon && species && flavor && pokemonEvolutionData.length > 1 && (
           <div>
             <h3>Evolutions</h3>
-            <EvolutionResults evolutions={pokemonEvolutionData}/>
+            <EvolutionResults evolutions={pokemonEvolutionData} getPokemon={getPokemon}/>
           </div>
         )}
         

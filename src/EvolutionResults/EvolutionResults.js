@@ -1,6 +1,7 @@
 import React from 'react'
 // import Pokemon from '../pokemon/Pokemon';
 import "./evolutionResults.css"
+import Evolution from '../Evolution/Evolution'
 
 
 function EvolutionResults(props) {
@@ -13,9 +14,7 @@ function EvolutionResults(props) {
         <div className="evo-results">
                 {evolutions.map((pokemon, i) => {
                     return (<div className="evolution" key={i}>
-                        <h4 className="capitalize">{pokemon.name}</h4>
-                        <p>{pokemon.id}</p>
-                        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                        <Evolution getPokemon={props.getPokemon} name={pokemon.name} img={pokemon.sprites.front_default}/>
                     </div>)
                 })}
                 </div>
