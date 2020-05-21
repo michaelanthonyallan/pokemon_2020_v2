@@ -101,6 +101,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <br></br>
+        <br></br>
+        <br></br>
         <button onClick={randomPokemon}>Get Random Pokemon</button>
 
         {pokemon && species &&(

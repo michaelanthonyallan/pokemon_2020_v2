@@ -30,22 +30,24 @@ export default function Pokemon(props) {
         <React.Fragment>
 
             
-            
-            <h2>Your pokemon is...</h2>
-            <p className="capitalize">Name: {props.pokemon.name}</p>
-            <p className="capitalize">{plural ? 'Types: ' : 'Type: '} {props.types}</p>
+            <h1 className="capitalize">Name: {props.pokemon.name}</h1>
+            <h3>Pokédex Entry: {props.pokemon.id}</h3>
+            <h2 className="capitalize">{plural ? 'Types: ' : 'Type: '} {props.types}</h2>
             
 
             <img src={shiny ? props.img : props.shiny} height="200" width="200" alt={props.pokemon.name} />
             <br></br>
             <br></br>
 
+
             <button onClick={makeShiny}>{shiny ? "Make Shiny" : "Make Normal"}</button>
+            <br></br>
+            <br></br>
 
             <p className="flavor-text">{props.text[`${number}`].flavor_text}</p>
             <p className="capitalize">pokemon {props.text[`${number}`].version.name}</p>
             
-
+<br></br>
             <button onClick={changeFlavorText}>Change Flavor Text!</button>
             
 

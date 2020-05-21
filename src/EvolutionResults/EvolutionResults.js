@@ -13,7 +13,8 @@ function EvolutionResults(props) {
         <div className="evo-results">
                 {evolutions.map((pokemon, i) => {
                     return (<div className="evolution" key={i}>
-                        <p>{pokemon.name}</p>
+                        <h4 className="capitalize">{pokemon.name}</h4>
+                        <p>{pokemon.id}</p>
                         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                     </div>)
                 })}
