@@ -1,4 +1,5 @@
 import React from 'react'
+import './Evolution.css'
 
 export default function Evolution(props) {
 
@@ -11,7 +12,10 @@ export default function Evolution(props) {
         <div className="evolution">
             <h4 className="capitalize">{props.name}</h4>
             <p>{props.id}</p>
-            <img onClick={() => getPokemon(props.name)}src={props.img} alt={props.name} />
+            <img src={props.img} alt={props.name} />
+            <br></br>
+            <br></br>
+            <button onClick={() => getPokemon(props.name)} >View Pokemon</button>
         </div>
 
     )
