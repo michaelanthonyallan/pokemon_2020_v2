@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Axios from 'axios'
+import PokemonResults from './pokemonResults/PokemonResults';
+import EvolutionResults from './EvolutionResults/EvolutionResults';
 
 function App() {
   const [pokemon, setPokemon] = useState("")
@@ -11,7 +13,9 @@ function App() {
   async function randomPokemon() {
     let randomNumber = (Math.floor(Math.random() * Math.floor(809)))
     try {
+      if(randomNumber > 0 ){
       getPokemon(randomNumber)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -64,7 +68,6 @@ function App() {
 
         evoData = evoData["evolves_to"][0];
       } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-      console.log("evo chain from getEvolutions function: ", evoChain)
 
       let evolutions = []
       let fulfilled = []
@@ -77,7 +80,7 @@ function App() {
 
       })
 
-      Axios.all(evolutions).then(
+      await Axios.all(evolutions).then(
         (Axios.spread((...args) => {
           fulfilled.push(args)
           fulfilled[0].forEach(element => {
@@ -98,7 +101,23 @@ function App() {
     <div className="App">
       <header className="App-header">
         <button onClick={randomPokemon}>Get Random Pokemon</button>
+
+        {pokemon && species &&(
+        <div>
+
+        <PokemonResults pokemon={pokemon} allFlavorText={flavor} evolutions={pokemonEvolutionData}/>
+
         <button onClick={getEvolutions}>Get Evolutions</button>
+
+        </div>)}
+
+        {pokemon && species && flavor && pokemonEvolutionData && (
+          <div>
+            <EvolutionResults evolutions={pokemonEvolutionData}/>
+          </div>
+        )}
+        
+        
       </header>
     </div>
   );
